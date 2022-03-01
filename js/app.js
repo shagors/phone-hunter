@@ -74,15 +74,15 @@ const phoneDetails = (phoneInfo) => {
             <h4>${phoneInfo.name}</h4>
         </div>
         <div class="card-body col-lg-6">
-            <p><h5>Release Date:</h5> ${phoneInfo.releaseDate}</p>
-            <p><h5>Storage:</h5> ${phoneInfo.mainFeatures.storage}</p>
-            <p><h5>Display-Size:</h5> ${phoneInfo.mainFeatures.displaySize}
+            <p><h5>Release Date:</h5> ${phoneInfo.releaseDate || 'This phone released date not published'}</p>
+            <p><h5>Storage:</h5> ${phoneInfo.mainFeatures.storage || 'Details not found'}</p>
+            <p><h5>Display-Size:</h5> ${phoneInfo.mainFeatures.displaySize || 'Display size not mentioned'}
             <h5>ChipSet:</h5>
-            <p>${phoneInfo.mainFeatures.chipSet}</p>
+            <p>${phoneInfo.mainFeatures.chipSet || 'unrecognized chipSet'}</p>
             <h5>Sensors:</h5>
-            <p>${phoneInfo.mainFeatures.sensors}</p>
+            <p>${phoneInfo.mainFeatures.sensors || 'Details not found'}</p>
             <h5>Others Features:</h5>
-            <p><h6>WLAN:</h6> ${phoneInfo.others.WLAN} <h6>Bluetooth:</h6> ${phoneInfo.others.Bluetooth} <h6>GPS:</h6> ${phoneInfo.others.GPS} <h6>NFC:</h6> ${phoneInfo.others.NFC} <h6>USB:</h6> ${phoneInfo.others.USB}</p>
+            <p><h6>WLAN:</h6> ${phoneInfo.others.WLAN || 'Unverified details'} <h6>Bluetooth:</h6> ${phoneInfo.others.Bluetooth} <h6>GPS:</h6> ${phoneInfo.others.GPS || 'Unverified details'} <h6>NFC:</h6> ${phoneInfo.others.NFC || 'Unverified details'} <h6>USB:</h6> ${phoneInfo.others.USB || 'Unverified details'}</p>
             <p</p>
             </p>
         </div>
