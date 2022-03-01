@@ -28,14 +28,14 @@ const displayPhone = phoneList => {
   // phone add
   const phoneContainer = document.getElementById('phone-container');
   phoneContainer.textContent = '';
-  const firstTwentyData = phoneList.slice(0, 20);
+  const first20Data = phoneList.slice(0, 20);
   // phone model error handle
-  if (firstTwentyData.length === 0) {
+  if (first20Data.length === 0) {
     const notFoundError = document.getElementById('notfound-error');
     notFoundError.innerText = 'Not found Your Phone or model name';
   } else {
     // loop through for array
-    phoneList.forEach(phone => {
+    first20Data.forEach(phone => {
       // separate phone
       const div = document.createElement('div');
       div.className = 'col-lg-4';
