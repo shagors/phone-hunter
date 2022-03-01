@@ -27,14 +27,14 @@ const displayPhone = phoneList => {
   phoneContainer.textContent = '';
   if (phoneList.length === 0) {
     const notFoundError = document.getElementById('notfound-error');
-    notFoundError.innerText = 'not found Your Phone or model name';
-  }
-  // console.log(phoneContainer);
-  phoneList.forEach(phone => {
-    // console.log(phone)
-    const div = document.createElement('div');
-    div.className = 'col-lg-4';
-    div.innerHTML = `
+    notFoundError.innerText = 'Not found Your Phone or model name';
+  } else {
+    // console.log(phoneContainer);
+    phoneList.forEach(phone => {
+      // console.log(phone)
+      const div = document.createElement('div');
+      div.className = 'col-lg-4';
+      div.innerHTML = `
             <div class="card  m-2 p-3 shadow p-3 bg-body rounded">
             <img src="${phone.image}" class="card-img-top w-75 mx-auto" alt="...">
             <div class="card-body">
@@ -44,8 +44,11 @@ const displayPhone = phoneList => {
             </div>
           </div>   
         `
-    phoneContainer.appendChild(div);
-  })
+      phoneContainer.appendChild(div);
+    });
+    const notFoundError = document.getElementById('notfound-error');
+    notFoundError.style.display = 'none';
+  }
 
 }
 
