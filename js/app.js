@@ -1,67 +1,67 @@
 const allPhone = () => {
-    const searhValueText = document.getElementById('search-box');
+    const searchValueText = document.getElementById('search-field');
     const error = document.getElementById('error');
-    const searchValue = searhValueText.value
+    const searchValue = searchValueText.value;
+    searchValueText.value = '';
 
-    console.log(searchValue);
+    // console.log(searchValue);
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
     fetch(url)
         .then(res => res.json())
-        .then(data => displayPhone(data.data))
-    phoneContainer.innerHTML = "";
-    input.value = "";
-    error.innerHTML = "";
+        .then(data => displayPhone(data.data));
+    // phoneContainer.innerHTML = "";
+    // error.innerHTML = "";
 
 }
 
 
 
-const displayPhone = (phonelist) => {
-    console.log(phonelist);
+const displayPhone = (phoneList) => {
+    // console.log(phoneList);
     const phoneContainer = document.getElementById('phone-container');
-    console.log(phoneContainer);
-    phonelist.forEach(phone => {
-        console.log(phone)
-        const div = document.createElement("div")
-        div.className = "col-lg-4"
+    phoneContainer.textContent = '';
+    // console.log(phoneContainer);
+    phoneList.forEach(phone => {
+        // console.log(phone)
+        const div = document.createElement('div');
+        div.className = 'col-lg-4';
         div.innerHTML = `
             <div class="card  m-2 p-3 shadow p-3 bg-body rounded">
-            <img src="${phone.image}" class="card-img-top" alt="...">
+            <img src="${phone.image}" class="card-img-top w-75 mx-auto" alt="...">
             <div class="card-body">
               <h5 class="card-title">${phone.brand}</h5>
               <h4>${phone.phone_name}</h4>
-              <a href="#" onclick="details('${phone.slug}')" class="btn btn-primary">Know Details</a>
+              <a href="#" onclick="details('${phone.slug}')" class="btn btn-primary">Details</a>
             </div>
           </div>   
         `
-        phoneContainer.appendChild(div)
+        phoneContainer.appendChild(div);
     })
 
 }
 
-const details = (id) => {
-    console.log('ok Boss', id)
-    const url = `https://openapi.programming-hero.com/api/phone/${id}`
+const details = (phoneId) => {
+    // console.log(id);
+    const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
     fetch(url)
         .then(res => res.json())
-        .then(data => setDetilse(data.data))
+        .then(data => phoneDetails(data.data));
 }
 
-const setDetilse = (info) => {
-    console.log(info);
+const phoneDetails = (phoneInfo) => {
+    console.log(phoneInfo);
     const phoneDetails = document.getElementById('phone-details');
-    const div = document.createElement("div");
-    console.log(div)
+    const div = document.createElement('div');
     div.innerHTML = `
       <div class="card mb-3">
-      <img src="${info.image}" class="card-img-top" alt="...">
+      <img src="${phoneInfo.image}" class="card-img-top w-50 mx-auto" alt="...">
       <div class="card-body">
-        <h5 class="card-title">${info.brand}</h5>
-        <h4>${info.name}</h4>
-        <p>${info.mainFeatures.storage}</p>
+        <h5 class="card-title">${phoneInfo.brand}</h5>
+        <h4>${phoneInfo.name}</h4>
+        <p>${phoneInfo.mainFeatures.storage}</p>
       </div>
     </div>
     </div>
   `
-    phoneDetails.appendChild(div)
+    phoneDetails.appendChild(div);
 }
