@@ -25,17 +25,18 @@ const allPhone = () => {
 
 
 const displayPhone = phoneList => {
-  // console.log(phoneList);
+  // phone add
   const phoneContainer = document.getElementById('phone-container');
   phoneContainer.textContent = '';
   const firstTwentyData = phoneList.slice(0, 20);
+  // phone model error handle
   if (firstTwentyData.length === 0) {
     const notFoundError = document.getElementById('notfound-error');
     notFoundError.innerText = 'Not found Your Phone or model name';
   } else {
-    // console.log(phoneContainer);
+    // loop through for array
     phoneList.forEach(phone => {
-      // console.log(phone)
+      // separate phone
       const div = document.createElement('div');
       div.className = 'col-lg-4';
       div.innerHTML = `
@@ -55,7 +56,7 @@ const displayPhone = phoneList => {
   }
 
 }
-
+// phone id connect
 const details = (phoneId) => {
   // console.log(phoneId);
   const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
@@ -63,9 +64,9 @@ const details = (phoneId) => {
     .then(res => res.json())
     .then(data => phoneDetails(data.data));
 }
-
+// phone details for display
 const phoneDetails = (phoneInfo) => {
-  // console.log(phoneInfo);
+  // connect with display and add html
   const phoneDetails = document.getElementById('phone-details');
   const div = document.createElement('div');
   div.innerHTML = `
