@@ -11,18 +11,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="text-center">Find Your Phone</h1>
+    <h1 class="text-center">Find Your Phone by Brand</h1>
     <div class="container w-100 m-auto">
         <div class="row w-100 m-auto">
             <div class="text-center">
-                <h2 class="text-center">Search Phone By Brand</h2>
                 <div class="input-group mb-3 w-50 m-auto">
                     <input class="form-control me-2" id="search-field" type="search" placeholder="Search your Phone" aria-label="Search">
                     <button onclick="allPhone()" class="btn btn-outline-success text-white fs-4" id="search-btn" type="submit">Search</button>
                     <h2 id="error" class="text-danger text-center"></h2>
                 </div>
+                <!-- Empty error message -->
+                <h2 id="top-error"></h2>
+                <!-- dont find phone error -->
+                <h2 id="notfound-error"></h2>
+                <!-- banner for single phone show -->
                 <div id ="phone-details">
                 </div>
+                <!-- all phones show when search -->
                 <div id="phone-container" class="card-group" >
                 </div>
             </div>
