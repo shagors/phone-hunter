@@ -1,12 +1,17 @@
 const allPhone = () => {
   const searchValueText = document.getElementById('search-field');
   const searchValue = searchValueText.value;
+  // input value clear
   searchValueText.value = '';
+  // display details clear
+  const phoneDetailsNew = document.getElementById('phone-details');
+  phoneDetailsNew.textContent = '';
+  // phone check error
   if (searchValue === '') {
     const topError = document.getElementById('top-error');
     topError.innerText = 'Please enter a phone or model name';
   } else {
-    // console.log(searchValue);
+    // data pass
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
     fetch(url)
       .then(res => res.json())
@@ -14,7 +19,6 @@ const allPhone = () => {
     const topError = document.getElementById('top-error');
     topError.style.display = 'none';
   }
-  // error.innerHTML = "";
 
 }
 
@@ -43,7 +47,7 @@ const displayPhone = phoneList => {
               <a href="#" onclick="details('${phone.slug}')" class="btn btn-primary">Details</a>
             </div>
           </div>   
-        `
+        `;
       phoneContainer.appendChild(div);
     });
     const notFoundError = document.getElementById('notfound-error');
@@ -53,7 +57,7 @@ const displayPhone = phoneList => {
 }
 
 const details = (phoneId) => {
-  console.log(phoneId);
+  // console.log(phoneId);
   const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
   fetch(url)
     .then(res => res.json())
@@ -61,9 +65,8 @@ const details = (phoneId) => {
 }
 
 const phoneDetails = (phoneInfo) => {
-  console.log(phoneInfo);
+  // console.log(phoneInfo);
   const phoneDetails = document.getElementById('phone-details');
-  // phoneDetails.textContent = '';
   const div = document.createElement('div');
   div.innerHTML = `
     <div class="card mb-3">
@@ -74,21 +77,21 @@ const phoneDetails = (phoneInfo) => {
             <h4>${phoneInfo.name}</h4>
         </div>
         <div class="card-body col-lg-6">
-            <p><h5>Release Date:</h5> ${phoneInfo.releaseDate || 'This phone released date not published'}</p>
+            <p><h5>Release Date:</h5> ${phoneInfo.releaseDate || 'This phone released date not published yet'}</p>
             <p><h5>Storage:</h5> ${phoneInfo.mainFeatures.storage || 'Details not found'}</p>
             <p><h5>Display-Size:</h5> ${phoneInfo.mainFeatures.displaySize || 'Display size not mentioned'}
             <h5>ChipSet:</h5>
-            <p>${phoneInfo.mainFeatures.chipSet || 'unrecognized chipSet'}</p>
+            <p>${phoneInfo.mainFeatures.chipSet || 'Unverified chipSet'}</p>
             <h5>Sensors:</h5>
             <p>${phoneInfo.mainFeatures.sensors || 'Details not found'}</p>
             <h5>Others Features:</h5>
-            <p><h6>WLAN:</h6> ${phoneInfo.others.WLAN || 'Unverified details'} <h6>Bluetooth:</h6> ${phoneInfo.others.Bluetooth} <h6>GPS:</h6> ${phoneInfo.others.GPS || 'Unverified details'} <h6>NFC:</h6> ${phoneInfo.others.NFC || 'Unverified details'} <h6>USB:</h6> ${phoneInfo.others.USB || 'Unverified details'}</p>
+            <p><h6>WLAN:</h6> ${phoneInfo?.others?.WLAN || 'Features not found'} <h6>Bluetooth:</h6> ${phoneInfo?.others?.Bluetooth || 'Features not found'} <h6>GPS:</h6> ${phoneInfo?.others?.GPS || 'Features not found'} <h6>NFC:</h6> ${phoneInfo?.others?.NFC || 'Features not found'} <h6>Radio:</h6> ${phoneInfo?.others?.Radio || 'Features not found'} <h6>USB:</h6> ${phoneInfo?.others?.USB || 'Features not found'}</p>
             <p</p>
             </p>
         </div>
       </div>
     </div>
   `;
-  phoneDetails.innerHTML = '';
+  phoneDetails.textContent = '';
   phoneDetails.appendChild(div);
 }
