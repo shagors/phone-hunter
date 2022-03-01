@@ -1,6 +1,5 @@
 const allPhone = () => {
   const searchValueText = document.getElementById('search-field');
-  const error = document.getElementById('error');
   const searchValue = searchValueText.value;
   searchValueText.value = '';
   if (searchValue === '') {
@@ -25,7 +24,8 @@ const displayPhone = phoneList => {
   // console.log(phoneList);
   const phoneContainer = document.getElementById('phone-container');
   phoneContainer.textContent = '';
-  if (phoneList.length === 0) {
+  const firstTwentyData = phoneList.slice(0, 20);
+  if (firstTwentyData.length === 0) {
     const notFoundError = document.getElementById('notfound-error');
     notFoundError.innerText = 'Not found Your Phone or model name';
   } else {
@@ -36,7 +36,7 @@ const displayPhone = phoneList => {
       div.className = 'col-lg-4';
       div.innerHTML = `
             <div class="card  m-2 p-3 shadow p-3 bg-body rounded">
-            <img src="${phone.image}" class="card-img-top w-75 mx-auto" alt="...">
+            <img src="${phone.image}" class="card-img-top w-50 mx-auto" alt="...">
             <div class="card-body">
               <h5 class="card-title">${phone.brand}</h5>
               <h4>${phone.phone_name}</h4>
@@ -53,7 +53,7 @@ const displayPhone = phoneList => {
 }
 
 const details = (phoneId) => {
-  // console.log(id);
+  console.log(phoneId);
   const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
   fetch(url)
     .then(res => res.json())
@@ -63,24 +63,32 @@ const details = (phoneId) => {
 const phoneDetails = (phoneInfo) => {
   console.log(phoneInfo);
   const phoneDetails = document.getElementById('phone-details');
+  // phoneDetails.textContent = '';
   const div = document.createElement('div');
   div.innerHTML = `
-      <div class="card mb-3">
-      <img src="${phoneInfo.image}" class="card-img-top w-25 mx-auto" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">${phoneInfo.brand}</h5>
-        <h4>${phoneInfo.name}</h4>
-        <p><h5>Release Date:</h5> ${phoneInfo.mainFeatures.releaseDate}</p>
-        <p><h5>Storage:</h5> ${phoneInfo.mainFeatures.storage}</p>
-        <p><h5>Display-Size:</h5> ${phoneInfo.mainFeatures.displaySize}
-        <h5>ChipSet:</h5>
-        <p>${phoneInfo.chipSet}</p>
-        <h5>Others Features:</h5>
-        <p>WLAN: ${phoneInfo.others.WLAN} Bluetooth: ${phoneInfo.others.Bluetooth} GPS: ${phoneInfo.others.GPS} NFC: ${phoneInfo.others.NFC} USB: ${phoneInfo.others.USB}</p>
-        </p>
+    <div class="card mb-3">
+      <div class="row">
+        <div class="col-lg-6 text-center m-auto">
+          <img src="${phoneInfo.image}" class="card-img-top w-50 mx-auto" alt="...">
+          <h5 class="card-title">${phoneInfo.brand}</h5>
+            <h4>${phoneInfo.name}</h4>
+        </div>
+        <div class="card-body col-lg-6">
+            <p><h5>Release Date:</h5> ${phoneInfo.releaseDate}</p>
+            <p><h5>Storage:</h5> ${phoneInfo.mainFeatures.storage}</p>
+            <p><h5>Display-Size:</h5> ${phoneInfo.mainFeatures.displaySize}
+            <h5>ChipSet:</h5>
+            <p>${phoneInfo.mainFeatures.chipSet}</p>
+            <h5>Sensors:</h5>
+            <p>${phoneInfo.mainFeatures.sensors}</p>
+            <h5>Others Features:</h5>
+            <p><h6>WLAN:</h6> ${phoneInfo.others.WLAN} <h6>Bluetooth:</h6> ${phoneInfo.others.Bluetooth} <h6>GPS:</h6> ${phoneInfo.others.GPS} <h6>NFC:</h6> ${phoneInfo.others.NFC} <h6>USB:</h6> ${phoneInfo.others.USB}</p>
+            <p</p>
+            </p>
+        </div>
       </div>
     </div>
-    </div>
-  `
+  `;
+  phoneDetails.innerHTML = '';
   phoneDetails.appendChild(div);
 }
